@@ -1,8 +1,6 @@
 import java.util.HashMap;
 import java.util.Map;
 
-import static java.lang.Integer.MAX_VALUE;
-
 public class Main {
     public static String text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit" +
             ", sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. " +
@@ -11,9 +9,10 @@ public class Main {
             "voluptate velit esse cillum dolore eu fugiat nulla pariatur. " +
             "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui " +
             "officia deserunt mollit anim id est laborum.";
+    public static Map<Character, Integer> letter = new HashMap<>();
 
     public static void main(String[] args) {
-        Map<Character, Integer> letter = new HashMap<>();
+
         text = text.toLowerCase();
         char symbols;
         for (int i = 0; i < text.length(); i++) {
@@ -28,26 +27,38 @@ public class Main {
                 }
             }
         }
-        Map.Entry<Character, Integer> maxValue = null;
-        for (Map.Entry<Character, Integer> entry : letter.entrySet()) {
-            if (maxValue == null || entry.getValue() > maxValue.getValue()) {
-                maxValue = entry;
-            }
-        }
+
         System.out.println("Чаще всего в тексте встречается буква " +
-                " " + maxValue.getKey() + ", " + maxValue.getValue() + " раза");
+                " " + maxV().getKey() + ", " + maxV().getValue() + " раза");
+
+        System.out.println("Реже всего в тексте встречается буква " +
+                " " + minV().getKey() + ", " + minV().getValue() + " раз");
+    }
+
+    protected static Map.Entry<Character, Integer> minV() {
         Map.Entry<Character, Integer> minValue = null;
         for (Map.Entry<Character, Integer> entry : letter.entrySet()) {
             if (minValue == null || entry.getValue() < minValue.getValue()) {
                 minValue = entry;
             }
         }
-        System.out.println("Реже всего в тексте встречается буква " +
-                " " + minValue.getKey() + ", " + minValue.getValue() + " раз");
+        return minValue;
     }
 
+    protected static Map.Entry<Character, Integer> maxV() {
+        Map.Entry<Character, Integer> maxValue = null;
+        for (Map.Entry<Character, Integer> entry : letter.entrySet()) {
+            if (maxValue == null || entry.getValue() > maxValue.getValue()) {
+                maxValue = entry;
+            }
 
+        }
+        return maxValue;
+
+
+    }
 }
+
 
 
 
